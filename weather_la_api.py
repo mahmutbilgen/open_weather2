@@ -2,13 +2,11 @@ import datetime
 import json
 import urllib.request
 
-
 def time_converter(time):
     converted_time = datetime.datetime.fromtimestamp(
         int(time)
     ).strftime('%I:%M %p')
     return converted_time
-
 
 def url_builder(city_id):
     user_api_key = 'bbb1a0a0dfcd60d4ed0bcc32f6cd12d1'  # Obtained from: http://openweathermap.org/
@@ -16,9 +14,7 @@ def url_builder(city_id):
     unit = 'metric'
     # Search for your city ID here: http://bulk.openweathermap.org/sample/city.list.json.gz
     api = 'http://api.openweathermap.org/data/2.5/weather?id='
-    '''    
-        "id": 5368361,"name": "Los Angeles", "country": "US","coord": {"lon": -118.243683,"lat": 34.052231}
-    '''
+
     full_api_url = api + str(city_id) + \
         '&mode=json&units=' + unit + '&APPID=' + user_api_key
     return full_api_url
@@ -49,7 +45,6 @@ def data_organizer(raw_data):
     )
     return data
 
-#
 def data_writer(data):
 
     data['m_symbol'] = '\xb0' + 'C'
@@ -70,12 +65,14 @@ Last update from the server: {dt}
 ---------------------------------------'''
     print(s.format(**data))
 
-
 if __name__ == '__main__':
     try:
         data_writer(
             data_organizer(
                 data_fetch(
                     url_builder(5368361))))
+    '''    
+        "id": 5368361,"name": "Los Angeles", "country": "US","coord": {"lon": -118.243683,"lat": 34.052231}
+    '''
     except IOError:
         print('internet connection issue')
