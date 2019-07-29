@@ -13,7 +13,7 @@ python3 weather_la_api.py
 ### Run with Docker
 
 ```
-docker run -it -p 8080:8080 mbilgen/metacritic:latest
+docker run -it  mbilgen/currentweatherla:latest
 ```
 
 
